@@ -61,7 +61,7 @@ $data = Array (
         Array ('login' => 'user2',
                'customerId' => 10,
                'firstName' => 'Mike',
-               'lastName' => NULL,
+               'lastName' => null,
                'password' => $db->func('SHA1(?)',Array ("secretpassword2+salt")),
                'createdAt' => $db->now(),
                'updatedAt' => $db->now(),
@@ -251,7 +251,7 @@ if ($db->count != 2) {
 //$users = $db->get("users");
 //print_r ($users);
 
-$db->where("firstname", Array ('LIKE' => '%John%'));
+$db->where("firstname", '%John%', 'like');
 $users = $db->get("users");
 if ($db->count != 1) {
     echo "Invalid insert count in LIKE: ".$db->count;
@@ -312,7 +312,7 @@ if ($db->count != 2) {
     exit;
 }
 ///
-$db->where ("lastName", NULL, '<=>');
+$db->where ("lastName", null, '<=>');
 $r = $db->get("users");
 if ($db->count != 1) {
     echo "Invalid users count on null where()";
